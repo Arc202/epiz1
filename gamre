@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeZeroUSA Firetruck Scroller</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-darkly@5.1.3/dist/css/bootstrap-darkly.min.css">
+    <style>
+        body {
+            background-color: #333;
+        }
+        .video-card {
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: transform 0.5s;
+        }
+        .video-card:hover {
+            transform: scale(1.05);
+        }
+        .video-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .video-card .card-body {
+            padding: 10px;
+        }
+        .modal-content {
+            border-radius: 10px;
+            background-color: #444;
+            color: #fff;
+        }
+        .navbar {
+            background-color: #333;
+        }
+        .navbar ul li a {
+            color: #fff;
+        }
+        .navbar ul li a:hover {
+            color: #ccc;
+        }
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        #carouselExampleControls {
+            height: 500px;
+        }
+        #carouselExampleControls img {
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span style="color: #03055B;">CodeZero</span>
+                <span style="color: #FF0000;">U</span>
+                <span style="color: #FFFFFF;">S</span>
+                <span style="color: #03055B;">A</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Home
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="home.html">Home</a></li>
+                            <li><a class="dropdown-item" href="menu.html">Menu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">CodeZeroUSA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="pulsepoint.html">PulsePoint</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://pixabay.com/get/g6b3e9d4-6d6f-4d3a-b9b3-a9f2e2a8d4d4/sunfire-truck-truck-emergency-vehicle-162584_1280.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://pixabay.com/get/gbe7f2ef-8b5c-4f8f-8bb9-ec5f1cf63b3b/fire-truck-emergency-vehicle-vehicle-162585_1280.jpg" class="d-block w-100" alt="...">
+            </div>
+            <div class="carousel-item">
+                <img src="https://pixabay.com/get/g72badf9-7f1b-431d-9e7c-74df65dd334a/fire-engine-fire-truck-emergency-162587_1280.jpg" class="d-block w-100" alt="...">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div class="container mt-5 pt-5">
+        <h1 class="text-center mb-5 text-light">CodeZeroUSA Firetruck Scroller</h1>
+        <div class="video-list" id="video-list">
+            <!-- videos will be loaded here -->
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="video-modal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="video-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <iframe id="video-iframe" width="100%" height="500" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const videoList = document.getElementById('video-list');
+        const videoUrls = [
+            'https://www.youtube.com/embed/Ue6Cm3f8fEo', 
+            'https://www.youtube.com/embed/jTgk9Z5q1J0', 
+            'https://www.youtube.com/embed/HzB7D2d0eSk', 
+            'https://www.youtube.com/embed/qW_j2WzQ230', 
+            'https://www.youtube.com/embed/zjiCFPdWKJ0', 
+            'https://www.youtube.com/embed/w1qtuQER1FQ', 
+            'https://www.youtube.com/embed/b533tgT2UDM',
+            'https://www.youtube.com/embed/QFLpRPRqqrc',
+            'https://www.youtube.com/embed/vCJR6kLe61c',
+            'https://www.youtube.com/embed/oGC10BHfAtY',
+            'https://www.youtube.com/embed/8a5CEE-f_FY',
+            'https://www.youtube.com/embed/KIRh7bbcs2c'
+        ];
+        const videos = [];
+
+        videoUrls.forEach((url, index) => {
+            const videoId = url.split('/').pop();
+            const thumbnailUrl = `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+            const video = {
+                id: index,
+                url: url,
+                title: `Video ${index + 1}`,
+                description: `This is video ${index + 1}`,
+                thumbnail: thumbnailUrl
+            };
+            videos.push(video);
+        });
+
+        videos.forEach(video => {
+            const videoCard = document.createElement('div');
+            videoCard.classList.add('video-card', 'card', 'bg-dark', 'text-light');
+            videoCard.innerHTML = `
+                <img src="${video.thumbnail}" alt="${video.title}" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">${video.title}</h5>
+                    <p class="card-text">${video.description}</p>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#video-modal" data-video-url="${video.url}">Watch Video</button>
+                </div>
+            `;
+            videoList.appendChild(videoCard);
+        });
+
+        // Add event listener to video buttons
+        videoList.addEventListener('click', event => {
+            if (event.target.tagName === 'BUTTON') {
+                const videoUrl = event.target.dataset.videoUrl;
+                const iframe = document.getElementById('video-iframe');
+                iframe.src = videoUrl;
+                const videoTitle = event.target.closest('.video-card').querySelector('.card-title').textContent;
+                document.getElementById('video-title').textContent = videoTitle;
+            }
+        });
+    </script>
+</body>
+</html>
