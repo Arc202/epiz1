@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CodeZeroUSA Firetruck Scroller</title>
+    <title>CodeZerousa Scroller</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-darkly@5.1.3/dist/css/bootstrap-darkly.min.css">
     <style>
@@ -61,10 +61,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <span style="color: #03055B;">CodeZero</span>
-                <span style="color: #FF0000;">U</span>
-                <span style="color: #FFFFFF;">S</span>
-                <span style="color: #03055B;">A</span>
+                <span style="color: #03055B;">CodeZerousa</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -81,7 +78,7 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about.html">CodeZeroUSA</a>
+                        <a class="nav-link" href="about.html">CodeZerousa</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pulsepoint.html">PulsePoint</a>
@@ -112,7 +109,7 @@
         </button>
     </div>
     <div class="container mt-5 pt-5">
-        <h1 class="text-center mb-5 text-light">CodeZeroUSA Firetruck Scroller</h1>
+        <h1 class="text-center mb-5 text-light">CodeZerousa Scroller</h1>
         <div class="video-list" id="video-list">
             <!-- videos will be loaded here -->
         </div>
@@ -137,27 +134,26 @@
     <script>
         const videoList = document.getElementById('video-list');
         const videoUrls = [
-            'https://www.youtube.com/embed/Ue6Cm3f8fEo', 
-            'https://www.youtube.com/embed/jTgk9Z5q1J0', 
-            'https://www.youtube.com/embed/HzB7D2d0eSk', 
-            'https://www.youtube.com/embed/qW_j2WzQ230', 
-            'https://www.youtube.com/embed/zjiCFPdWKJ0', 
-            'https://www.youtube.com/embed/w1qtuQER1FQ', 
-            'https://www.youtube.com/embed/b533tgT2UDM',
-            'https://www.youtube.com/embed/QFLpRPRqqrc',
-            'https://www.youtube.com/embed/vCJR6kLe61c',
-            'https://www.youtube.com/embed/oGC10BHfAtY',
-            'https://www.youtube.com/embed/8a5CEE-f_FY',
-            'https://www.youtube.com/embed/KIRh7bbcs2c'
+            'https://www.youtube.com/watch?v=b533tgT2UDM', 
+            'https://www.youtube.com/watch?v=jln_qgZPr6Y',
+            'https://www.youtube.com/watch?v=qW_j2WzQ230',
+            'https://www.youtube.com/watch?v=S-1J6NPgWdk',
+            'https://www.youtube.com/watch?v=wtDcBd0H-c8',
+            'https://www.youtube.com/watch?v=0wqx4y0q5wU',
+            'https://www.youtube.com/watch?v=NM0WNPar7Z0',
+            'https://www.youtube.com/watch?v=FZqOHyvtZBs',
+            'https://www.youtube.com/watch?v=S6xd3bRXwdA',
+            'https://www.youtube.com/watch?v=JBk7YA7nQCc'
         ];
         const videos = [];
 
         videoUrls.forEach((url, index) => {
-            const videoId = url.split('/').pop();
+            const videoId = url.split('v=')[1];
             const thumbnailUrl = `https://i3.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+            const videoEmbedUrl = `https://www.youtube.com/embed/${videoId}`;
             const video = {
                 id: index,
-                url: url,
+                url: videoEmbedUrl,
                 title: `Video ${index + 1}`,
                 description: `This is video ${index + 1}`,
                 thumbnail: thumbnailUrl
